@@ -3,11 +3,19 @@
     "name": "waitjs",
     "description": "Syntactic sugar for setTimeout and setInterval.",
     "version": "0.0.1",
-    "homepage": "",
+    "main": "./wait.js",
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/elving/wait.git"
     },
+    "keywords": [
+        "wait",
+        "setTimeout",
+        "setInterval",
+        "repeat",
+        "interval",
+        "timeout"
+    ],
     "engines": {
         "node": "~0.6.10 || 0.8 || 0.9"
     },
