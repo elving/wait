@@ -2,12 +2,33 @@
 
     var root = this;
 
-    var isSeconds = /(seconds?|secs?|s)/i,
-        isMinutes = /(minutes?|mins?|m)/i,
-        isHours = /(hours?|hrs?|h)/i;
+    var toString = Object.prototype.toString;
+
+    var ids = {};
+
+    var isSeconds = /(seconds?|secs?|^([0-9]+)s)/i,
+        isMinutes = /(minutes?|mins?|^([0-9]+)m)/i,
+        isHours = /(hours?|hrs?|^([0-9]+)h)/i;
 
     var isNumber = function (value) {
-        return Object.prototype.toString.call(value) == '[object Number]';
+        return toString.call(value) == '[object Number]';
+    };
+
+    var isString = function (value) {
+        return toString.call(value) == '[object String]';
+    };
+
+    var isBoolean = function (value) {
+        return toString.call(value) == '[object Boolean]';
+    };
+
+    var isArray = function (value) {
+        return toString.call(value) == '[object Array]';
+    };
+
+    var isTime = function (value) {
+        var timeTest = /(seconds?|secs?|^([0-9]+)s|minutes?|mins?|^([0-9]+)m|hours?|hrs?|^([0-9]+)h)/i;
+        return isNumber(value) || timeTest.test(value);
     };
 
     var parseTime = function (value) {
@@ -42,29 +63,91 @@
         }
     };
 
-    root.wait = function(time, callback) {
+    root.wait = function(time, callback, id) {
+        var timeout = 0;
+
         time = isNumber(time) ? time : parseTime(time);
-        return setTimeout(callback, time);
+        timeout = setTimeout(callback, time);
+
+        if (id && isString(id)) ids[id] = timeout;
+
+        return timeout;
     };
 
-    root.repeat = function(time, callback, callBefore) {
+    root.repeat = function(time, callback, id, callBefore) {
+        var interval = 0;
+
         time = isNumber(time) ? time : parseTime(time);
-        callBefore = callBefore || false;
+
+        if (arguments.length === 3) {
+            if (isBoolean(id)) {
+                callBefore = id;
+            }
+        }
 
         if (callBefore) callback();
-        return setInterval(callback, time);
+        interval = setInterval(callback, time);
+
+        if (id && isString(id)) ids[id] = interval;
+
+        return interval;
     };
 
-    root.until = function(condition, callback, time) {
-        time = time || 100;
-        time = isNumber(time) ? time : parseTime(time);
+    root.until = function(condition, callback, time, id) {
+        if (arguments.length === 3) {
+            if (isTime(time) || isNumber(time)) {
+                time = time;
+                time = isNumber(time) ? time : parseTime(time);
+            } else {
+                id = time;
+                time = 100;
+            }
+        } else if (arguments.length === 4) {
+            time = time || 100;
+            time = isNumber(time) ? time : parseTime(time);
+        } else {
+            time = 100;
+        }
 
         var interval = root.repeat(time, function() {
             if (condition()) {
-                clearInterval(interval);
+                root.clear(interval);
                 callback();
             }
-        }, true);
+        }, id, true);
+
+        return interval;
+    };
+
+    _clear = function(id) {
+        clearInterval(id);
+        clearTimeout(id);
+    };
+
+    root.clear = function(id) {
+        var _ids = [],
+            _id = '';
+
+        if (arguments.length === 0) {
+            for(id in ids) {
+                _clear(ids[id]);
+                delete ids[id];
+            }
+        } else if (isArray(id) || isString(id)) {
+            _ids = isArray(id) ? id.slice() : [id];
+            for(var x = 0; x < _ids.length; x++) {
+                _id = _ids[x];
+
+                if (isString(_id)) {
+                    _clear(ids[_id]);
+                    delete ids[_id];
+                } else {
+                    _clear(_id);
+                }
+            }
+        } else {
+            _clear(id);
+        }
     };
 
 })();
