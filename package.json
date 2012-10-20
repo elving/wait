@@ -2,7 +2,7 @@
     "author": "Elving Rodriguez",
     "name": "waitjs",
     "description": "Syntactic sugar for setTimeout and setInterval.",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "main": "./wait.js",
     "repository": {
         "type": "git",

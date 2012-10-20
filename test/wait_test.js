@@ -70,3 +70,33 @@ describe('repeat', function() {
         }, 5000);
     });
 });
+
+describe('until', function() {
+    it('should run the callback when the condition is true.', function(done) {
+        var count = 0,
+            interval = '',
+            condition = function() {
+                return count > 4;
+            };
+
+        until(condition, done);
+
+        for(var i = 0; i < 5; i++) {
+            count += 1;
+        }
+    });
+
+    it('should run the callback when the condition is true (passing an interval).', function(done) {
+        var count = 0,
+            interval = '',
+            condition = function() {
+                return count > 100;
+            };
+
+        until(condition, done, '1 sec');
+
+        for(var i = 0; i <= 100; i++) {
+            count += 1;
+        }
+    });
+});

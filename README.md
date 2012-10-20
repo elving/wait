@@ -31,6 +31,22 @@ If `callBefore` is true the callback will be executed before the interval.
         // Run immediately and every minute
     }, true);
 
+## until(condition, callback, interval = 100)
+
+Runs the callback function when the condition is true. If you don't specify an interval the condition will be check every 100 milliseconds.
+
+    var condition = function() {
+        return 1 == 1;
+    };
+
+    until(condition, function() {
+        // Do something when 1 == 1
+    });
+
+    until(condition, function() {
+        // Check every second if 1 == 1 and do something.
+    }, '1 second');
+
 ## time
 
 Time can be specified in various formats:
@@ -48,3 +64,6 @@ Time can be specified in various formats:
 
     <!-- browser -->
     <script src="wait.js"></script>
+
+## Tests
+    npm test

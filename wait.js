@@ -55,4 +55,16 @@
         return setInterval(callback, time);
     };
 
+    root.until = function(condition, callback, time) {
+        time = time || 100;
+        time = isNumber(time) ? time : parseTime(time);
+
+        var interval = root.repeat(time, function() {
+            if (condition()) {
+                clearInterval(interval);
+                callback();
+            }
+        }, true);
+    };
+
 })();
