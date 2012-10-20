@@ -12,7 +12,7 @@ Sugar for setTimeout.
     wait('2s', function(){
         // Do something in 2 seconds
     });
-    
+
     wait('2 minutes', function(){
         // Do something in 2 seconds
     }, 'awesomeId');
@@ -34,7 +34,7 @@ If `callBefore` is true the callback will be executed before the interval.
     repeat('1 min', function() {
         // Run immediately and every minute
     }, true);
-    
+
     repeat('1 min', function() {
         // Run immediately and every minute
     }, 'awesomeId', true);
@@ -54,12 +54,14 @@ Runs the callback function when the condition is true. If you don't specify an i
     until(condition, function() {
         // Check every second if 1 == 1 and do something.
     }, '1 second');
-    
+
     until(condition, function() {
         // Check every second if 1 == 1 and do something.
     }, 150, 'coolId');
 
 ## clear
+
+Syntactic sugar for clearInterval and clearTimeout
 
 The `clear()` method can be used in 3 ways:
 
