@@ -14,7 +14,7 @@ Sugar for setTimeout.
     });
 
     wait('2 minutes', function(){
-        // Do something in 2 seconds
+        // Do something in 2 minutes
     }, 'awesomeId');
 
 ## repeat(time, callback, id, callBefore = false)
