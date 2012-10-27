@@ -12,6 +12,7 @@
         "timeout"
     ],
     "main": "wait.js",
+    "scripts": ["wait.js"],
     "development": {
         "visionmedia/should.js": "*",
         "visionmedia/mocha": "*"
