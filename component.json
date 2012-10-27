@@ -1,0 +1,19 @@
+{
+    "name": "wait",
+    "repo": "elving/wait",
+    "description": "Syntactic sugar for setTimeout and setInterval.",
+    "version": "0.2.0",
+    "keywords": [
+        "wait",
+        "setTimeout",
+        "setInterval",
+        "repeat",
+        "interval",
+        "timeout"
+    ],
+    "main": "wait.js",
+    "development": {
+        "visionmedia/should.js": "*",
+        "visionmedia/mocha": "*"
+  }
+}
