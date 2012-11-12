@@ -94,7 +94,7 @@ Time can be specified in various formats:
 
 ## Usage
     // nodejs
-    require('wait');
+    require('waitjs');
 
     <!-- browser -->
     <script src="wait.js"></script>
