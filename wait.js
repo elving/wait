@@ -94,6 +94,11 @@
     };
 
     root.until = function(condition, callback, time, id) {
+        if (condition()) {
+            callback();
+            return;
+        }
+
         if (arguments.length === 3) {
             if (isTime(time) || isNumber(time)) {
                 time = time;
@@ -114,7 +119,7 @@
                 root.clear(interval);
                 callback();
             }
-        }, id, true);
+        }, id, false);
 
         return interval;
     };
