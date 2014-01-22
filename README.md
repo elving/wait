@@ -101,3 +101,7 @@ Time can be specified in various formats:
 
 ## Tests
     npm test
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/elving/wait/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
