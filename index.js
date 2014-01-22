@@ -1,6 +1,6 @@
 (function () {
 
-    var root = this;
+    var root = typeof exports != 'undefined' ? exports : this;
 
     var toString = Object.prototype.toString;
 
