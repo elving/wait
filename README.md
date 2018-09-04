@@ -1,4 +1,7 @@
 # wait
+
+![Project unmaintained](https://img.shields.io/badge/project-unmaintained-red.svg)
+
 Syntactic sugar for setTimeout and setInterval.
 
 ## wait(time, callback, id)
